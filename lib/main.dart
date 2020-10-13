@@ -44,27 +44,37 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.settings),
-            color: Theme.of(context).accentIconTheme.color,
-            onPressed: () async {
-              await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) => Settings()));
-            },
-          ),
-        ],
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[Text('Hooray')],
+        appBar: AppBar(
+          title: Text(widget.title),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.settings),
+              color: Theme.of(context).accentIconTheme.color,
+              onPressed: () async {
+                await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => Settings()));
+              },
+            ),
+          ],
         ),
-      ),
-    );
+        body: Container(
+          child: GridView.count(
+              crossAxisCount: 2,
+              childAspectRatio: 3.0,
+              padding: const EdgeInsets.all(4.0),
+              mainAxisSpacing: 4.0,
+              crossAxisSpacing: 4.0,
+              children: <String>[
+                'https://lachvandedag.nl/wp-content/uploads/2017/06/ben-je-thuis_lachvandedag-nl.jpg',
+                'https://lachvandedag.nl/wp-content/uploads/2017/06/ben-je-thuis_lachvandedag-nl.jpg',
+                'https://lachvandedag.nl/wp-content/uploads/2017/06/ben-je-thuis_lachvandedag-nl.jpg',
+                'https://lachvandedag.nl/wp-content/uploads/2017/06/ben-je-thuis_lachvandedag-nl.jpg',
+              ].map((String url) {
+                return GridTile(
+                    child: Image.network(url, fit: BoxFit.scaleDown));
+              }).toList()),
+        ));
   }
 }
