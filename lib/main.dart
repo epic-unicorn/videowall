@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:videowall/settings.dart';
+import 'package:videowall/widgets/VideoGrid.dart';
 
 import 'utils/theme_notifier.dart';
 import 'utils/themes.dart';
+import 'dart:html' as html;
+import 'dart:js' as js;
+import 'dart:ui' as ui;
 
 void main() {
   SharedPreferences.getInstance().then((prefs) {
@@ -41,6 +46,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String viewID = "your-view-id";
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,21 +72,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         body: Container(
-          child: GridView.count(
-              crossAxisCount: 2,
-              childAspectRatio: 3.0,
-              padding: const EdgeInsets.all(4.0),
-              mainAxisSpacing: 4.0,
-              crossAxisSpacing: 4.0,
-              children: <String>[
-                'https://lachvandedag.nl/wp-content/uploads/2017/06/ben-je-thuis_lachvandedag-nl.jpg',
-                'https://lachvandedag.nl/wp-content/uploads/2017/06/ben-je-thuis_lachvandedag-nl.jpg',
-                'https://lachvandedag.nl/wp-content/uploads/2017/06/ben-je-thuis_lachvandedag-nl.jpg',
-                'https://lachvandedag.nl/wp-content/uploads/2017/06/ben-je-thuis_lachvandedag-nl.jpg',
-              ].map((String url) {
-                return GridTile(
-                    child: Image.network(url, fit: BoxFit.scaleDown));
-              }).toList()),
+          color: Colors.blueGrey,
+          child: Center(
+            child: VideoGrid(),
+          ),
         ));
   }
 }

@@ -28,10 +28,6 @@ class _SettingState extends State<Settings> {
           title: Text('Instellingen'),
           centerTitle: true,
         ),
-        bottomNavigationBar: Container(
-          height: 50.0,
-          color: Theme.of(context).backgroundColor,
-        ),
         body: ListView(
           padding: EdgeInsets.all(20),
           children: <Widget>[
