@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:videowall/widgets/IFrameElement.dart';
 import 'package:videowall/widgets/randomgif.dart';
 
 class VideoGrid extends StatefulWidget {

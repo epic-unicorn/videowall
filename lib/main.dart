@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:videowall/settings.dart';
@@ -7,9 +6,6 @@ import 'package:videowall/widgets/videogrid.dart';
 
 import 'utils/theme_notifier.dart';
 import 'utils/themes.dart';
-import 'dart:html' as html;
-import 'dart:js' as js;
-import 'dart:ui' as ui;
 
 void main() {
   SharedPreferences.getInstance().then((prefs) {
