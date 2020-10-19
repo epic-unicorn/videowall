@@ -3,7 +3,7 @@ import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:videowall/settings.dart';
-import 'package:videowall/widgets/VideoGrid.dart';
+import 'package:videowall/widgets/videogrid.dart';
 
 import 'utils/theme_notifier.dart';
 import 'utils/themes.dart';
@@ -60,6 +60,13 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(widget.title),
           actions: <Widget>[
             IconButton(
+              icon: Icon(Icons.refresh),
+              color: Theme.of(context).accentIconTheme.color,
+              onPressed: () async {
+                setState(() {});
+              },
+            ),
+            IconButton(
               icon: Icon(Icons.settings),
               color: Theme.of(context).accentIconTheme.color,
               onPressed: () async {
@@ -72,7 +79,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         body: Container(
-          color: Colors.blueGrey,
           child: Center(
             child: VideoGrid(),
           ),

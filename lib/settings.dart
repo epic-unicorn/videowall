@@ -40,7 +40,7 @@ class _SettingState extends State<Settings> {
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).accentColor)),
                 Switch(
-                  activeColor: Theme.of(context).focusColor,
+                  activeColor: Theme.of(context).toggleableActiveColor,
                   value: _darkTheme,
                   onChanged: (val) {
                     setState(() {

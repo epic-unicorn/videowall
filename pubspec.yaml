@@ -13,6 +13,7 @@ dependencies:
   provider: ^4.3.2
   flutter_icons: ^1.1.0
   flutter_layout_grid: ^0.10.2
+  giphy_client: ^0.2.0
 
   flutter:
     sdk: flutter

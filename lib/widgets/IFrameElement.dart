@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:html' as html;
@@ -22,7 +24,7 @@ class _IFrameElementState extends State<IFrameElement> {
         (int id) => html.IFrameElement()
           ..width = MediaQuery.of(context).size.width.toString()
           ..height = MediaQuery.of(context).size.height.toString()
-          ..src = widget.videoUrl + '?autoplay=1&mute=1'
+          ..src = widget.videoUrl + '?autoplay=1&mute=1&autohide=1&&showinfo=0'
           ..style.border = 'none'
           ..allow = 'autoplay');
 
