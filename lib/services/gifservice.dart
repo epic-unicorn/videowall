@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:videowall/utils/gif.dart';
+import 'package:videowall/models/gif.dart';
 
 class GifService {
   static const String url = "http://api.giphy.com/v1/gifs/random?api_key=";
