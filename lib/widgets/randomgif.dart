@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:videowall/models/gif.dart';
+import 'package:videowall/models/Gif_model.dart';
 import 'package:videowall/services/gifservice.dart';
 
 class RandomGif extends StatefulWidget {

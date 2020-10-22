@@ -2,9 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
-import 'dart:js' as js;
-import 'dart:ui' as ui;
 
 class EmbeddedVideo extends StatefulWidget {
   final String videoUrl;

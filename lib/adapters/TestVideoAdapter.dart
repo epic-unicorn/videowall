@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:videowall/api/TestVideoApi.dart';
 import 'package:videowall/interfaces/IVideowallModelAdapter.dart';
-import 'package:videowall/models/videowall_model.dart';
+import 'package:videowall/models/Videowall_model.dart';
 
 class TestVideoAdapter implements IVideowallModelAdapter {
   final TestVideoApi _api = TestVideoApi();

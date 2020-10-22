@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:videowall/interfaces/IVideowallModelAdapter.dart';
-import 'package:videowall/models/videowall_model.dart';
+import 'package:videowall/models/Videowall_model.dart';
 
 class RandomTestVideo extends StatefulWidget {
   final IVideowallModelAdapter adapter;
@@ -48,7 +48,7 @@ class _RandomTestVideoState extends State<RandomTestVideo> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox.expand(
       child: AspectRatio(
         aspectRatio: _controller.value.aspectRatio,
         child: Stack(
