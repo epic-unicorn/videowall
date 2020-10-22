@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:videowall/widgets/randomgif.dart';
+import 'package:videowall/adapters/TestVideoAdapter.dart';
+import 'package:videowall/interfaces/IVideowallModelAdapter.dart';
+import 'package:videowall/widgets/RandomTestVideo.dart';
 
 class VideoGrid extends StatefulWidget {
   @override
@@ -9,6 +11,8 @@ class VideoGrid extends StatefulWidget {
 }
 
 class _VideoGridState extends State<VideoGrid> {
+  final IVideowallModelAdapter adapter = new TestVideoAdapter();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,23 +22,24 @@ class _VideoGridState extends State<VideoGrid> {
         templateColumnSizes: [
           FlexibleTrackSize(1),
           FlexibleTrackSize(1),
-          FlexibleTrackSize(1),
         ],
         templateRowSizes: [
           FlexibleTrackSize(1),
           FlexibleTrackSize(1),
-          FlexibleTrackSize(1),
         ],
         children: [
-          RandomGif(),
-          RandomGif(),
-          RandomGif(),
-          RandomGif(),
-          RandomGif(),
-          RandomGif(),
-          RandomGif(),
-          RandomGif(),
-          RandomGif(),
+          RandomTestVideo(
+            adapter: adapter,
+          ),
+          RandomTestVideo(
+            adapter: adapter,
+          ),
+          RandomTestVideo(
+            adapter: adapter,
+          ),
+          RandomTestVideo(
+            adapter: adapter,
+          ),
         ],
       ),
     );

@@ -14,7 +14,8 @@ dependencies:
   flutter_icons: ^1.1.0
   flutter_layout_grid: ^0.10.2
   giphy_client: ^0.2.0
-
+  video_player: ^0.11.1+2
+  
   flutter:
     sdk: flutter
 

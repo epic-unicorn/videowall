@@ -10,12 +10,12 @@ class TestVideoAdapter implements IVideowallModelAdapter {
   @override
   List<VideowallModel> getVideowallItems() {
     var contactsJson = _api.getTestVideos();
-    var contactsList = _parseContactsJson(contactsJson);
+    var contactsList = _parseJson(contactsJson);
 
     return contactsList;
   }
 
-  List<VideowallModel> _parseContactsJson(String testVideoJson) {
+  List<VideowallModel> _parseJson(String testVideoJson) {
     var testVideoMap = json.decode(testVideoJson) as Map<String, dynamic>;
     var videosJsonList = testVideoMap['videos'] as List;
     var videosList = videosJsonList

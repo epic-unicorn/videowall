@@ -6,19 +6,20 @@ import 'dart:html' as html;
 import 'dart:js' as js;
 import 'dart:ui' as ui;
 
-class IFrameElement extends StatefulWidget {
+class EmbeddedVideo extends StatefulWidget {
   final String videoUrl;
 
-  IFrameElement(this.videoUrl);
+  EmbeddedVideo(this.videoUrl);
 
   @override
-  _IFrameElementState createState() => _IFrameElementState();
+  _EmbeddedVideoState createState() => _EmbeddedVideoState();
 }
 
-class _IFrameElementState extends State<IFrameElement> {
+class _EmbeddedVideoState extends State<EmbeddedVideo> {
   @override
   Widget build(BuildContext context) {
     // ignore: undefined_prefixed_name
+    /*
     ui.platformViewRegistry.registerViewFactory(
         widget.videoUrl,
         (int id) => html.IFrameElement()
@@ -27,7 +28,7 @@ class _IFrameElementState extends State<IFrameElement> {
           ..src = widget.videoUrl + '?autoplay=1&mute=1&autohide=1&&showinfo=0'
           ..style.border = 'none'
           ..allow = 'autoplay');
-
+    */
     return Container(
       child: HtmlElementView(
         viewType: widget.videoUrl,
