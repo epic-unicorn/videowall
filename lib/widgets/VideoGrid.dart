@@ -23,29 +23,12 @@ class _VideoGridState extends State<VideoGrid> {
         templateColumnSizes: [
           FlexibleTrackSize(1),
           FlexibleTrackSize(1),
-          FlexibleTrackSize(1),
         ],
         templateRowSizes: [
           FlexibleTrackSize(1),
           FlexibleTrackSize(1),
-          FlexibleTrackSize(1),
         ],
         children: [
-          RandomTestVideo(
-            adapter: _adapter,
-          ),
-          RandomTestVideo(
-            adapter: _adapter,
-          ),
-          RandomTestVideo(
-            adapter: _adapter,
-          ),
-          RandomTestVideo(
-            adapter: _adapter,
-          ),
-          RandomTestVideo(
-            adapter: _adapter,
-          ),
           RandomTestVideo(
             adapter: _adapter,
           ),
