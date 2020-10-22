@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:videowall/adapters/videowalladapterbase.dart';
@@ -16,16 +14,13 @@ class RandomTestVideo extends StatefulWidget {
 }
 
 class _RandomTestVideoState extends State<RandomTestVideo> {
-  final List<VideowallModel> _videos = List<VideowallModel>();
-
   VideoPlayerController _controller;
 
   @override
   void initState() {
     super.initState();
-    _getRandomTestVideo();
-    VideowallModel _randomVideo = _videos[new Random().nextInt(_videos.length)];
-    _controller = VideoPlayerController.network(_randomVideo.videourl)
+    _controller = VideoPlayerController.network(
+        widget.adapter.getVideowallItem().videourl)
       ..setLooping(true)
       ..setVolume(0)
       ..play()
@@ -40,17 +35,11 @@ class _RandomTestVideoState extends State<RandomTestVideo> {
     super.dispose();
   }
 
-  void _getRandomTestVideo() {
-    setState(() {
-      _videos.addAll(widget.adapter.getVideowallItems());
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SizedBox.expand(
       child: AspectRatio(
-        aspectRatio: 16.0 / 9.0, //_controller.value.aspectRatio,
+        aspectRatio: _controller.value.aspectRatio,
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: <Widget>[
