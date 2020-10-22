@@ -1,7 +1,7 @@
-class Gif {
+class GifModel {
   String url;
 
-  Gif.fromJson(Map<String, dynamic> json) {
+  GifModel.fromJson(Map<String, dynamic> json) {
     url = json['data']['image_url'];
   }
 }

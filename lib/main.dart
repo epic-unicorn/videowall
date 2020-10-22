@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:videowall/settings.dart';
-import 'package:videowall/widgets/VideoGrid.dart';
+import 'package:videowall/widgets/videogrid.dart';
 import 'utils/theme_notifier.dart';
 import 'utils/themes.dart';
 
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.refresh),
               color: Theme.of(context).accentIconTheme.color,
               onPressed: () async {
-                Navigator.popAndPushNamed(context, '/Video Wall');
+                setState(() {});
               },
             ),
             IconButton(

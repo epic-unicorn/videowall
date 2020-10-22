@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:videowall/models/Gif_model.dart';
+import 'package:videowall/models/gif_model.dart';
 import 'package:videowall/services/gifservice.dart';
 
 class RandomGif extends StatefulWidget {
@@ -16,11 +16,11 @@ class _RandomGifState extends State<RandomGif> {
   Widget build(BuildContext context) {
     return Container(
         width: 620,
-        child: FutureBuilder<Gif>(
+        child: FutureBuilder<GifModel>(
             future: gifService.fetchImageUrlAsync(_tag), builder: _buildImage));
   }
 
-  Widget _buildImage(_, AsyncSnapshot<Gif> snapshot) {
+  Widget _buildImage(_, AsyncSnapshot<GifModel> snapshot) {
     if (snapshot.hasData) {
       return Image.network(snapshot.data.url, fit: BoxFit.cover);
     }
