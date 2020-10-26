@@ -40,7 +40,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String viewID = "your-view-id";
+  String viewID = "videowall-id";
+  String numberOfVideos = '4';
 
   @override
   void initState() {
@@ -53,6 +54,28 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text(widget.title),
           actions: <Widget>[
+            new DropdownButtonHideUnderline(
+              child: new DropdownButton<String>(
+                value: numberOfVideos,
+                items: <DropdownMenuItem<String>>[
+                  new DropdownMenuItem(
+                    child: new Text('1'),
+                    value: '1',
+                  ),
+                  new DropdownMenuItem(
+                    child: new Text('4'),
+                    value: '4',
+                  ),
+                  new DropdownMenuItem(
+                    child: new Text('9'),
+                    value: '9',
+                  ),
+                ],
+                onChanged: (String value) {
+                  setState(() => numberOfVideos = value);
+                },
+              ),
+            ),
             IconButton(
               icon: Icon(Icons.refresh),
               color: Theme.of(context).accentIconTheme.color,
@@ -72,10 +95,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-        body: Container(
-          child: Center(
-            child: VideoGrid(),
-          ),
-        ));
+        body: VideoGrid(numberOfVideos));
   }
 }
