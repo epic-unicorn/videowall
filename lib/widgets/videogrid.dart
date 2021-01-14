@@ -9,16 +9,15 @@ import 'package:videowall/widgets/randomtestvideo.dart';
 
 class VideoGrid extends StatefulWidget {
   final String numberOfVideos;
+  final VideowallAdapterBase videowallAdapter;
 
-  VideoGrid(this.numberOfVideos);
+  VideoGrid(this.numberOfVideos, this.videowallAdapter);
 
   @override
   _VideoGridState createState() => _VideoGridState();
 }
 
 class _VideoGridState extends State<VideoGrid> {
-  final VideowallAdapterBase _adapter = new TestVideoAdapter();
-
   @override
   Widget build(BuildContext context) {
     double _calculatedGridSize = sqrt(int.parse(widget.numberOfVideos));
@@ -36,9 +35,10 @@ class _VideoGridState extends State<VideoGrid> {
         ],
         children: [
           for (var i = 0; i < int.parse(widget.numberOfVideos); i++)
-            RandomTestVideo(
-              adapter: _adapter,
-            ),
+            if (widget.videowallAdapter is TestVideoAdapter)
+              RandomTestVideo(
+                adapter: widget.videowallAdapter,
+              ),
         ],
       ),
     );

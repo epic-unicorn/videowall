@@ -1,31 +1,37 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:videowall/settings.dart';
+import 'package:responsive_scaffold/responsive_scaffold.dart';
+import 'package:videowall/VideoSourceManager.dart';
 import 'package:videowall/widgets/videogrid.dart';
-import 'utils/theme_notifier.dart';
-import 'utils/themes.dart';
 
 void main() {
-  SharedPreferences.getInstance().then((prefs) {
-    var darkModeOn = prefs.getBool('darkMode') ?? false;
-    runApp(
-      ChangeNotifierProvider<ThemeNotifier>(
-        create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
-        child: MyApp(),
-      ),
-    );
-  });
+  if (!kIsWeb) _setTargetPlatformForDesktop();
+  return runApp(MyApp());
+}
+
+/// If the current platform is desktop, override the default platform to
+/// a supported platform (iOS for macOS, Android for Linux and Windows).
+/// Otherwise, do nothing.
+void _setTargetPlatformForDesktop() {
+  TargetPlatform targetPlatform;
+  if (Platform.isMacOS) {
+    targetPlatform = TargetPlatform.iOS;
+  } else if (Platform.isLinux || Platform.isWindows) {
+    targetPlatform = TargetPlatform.android;
+  }
+  if (targetPlatform != null) {
+    debugDefaultTargetPlatformOverride = targetPlatform;
+  }
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
     return MaterialApp(
       title: 'Video wall',
-      theme: themeNotifier.getTheme(),
+      theme: ThemeData.dark().copyWith(accentColor: Colors.red),
       home: MyHomePage(title: 'Video wall'),
     );
   }
@@ -41,22 +47,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String viewID = "videowall-id";
-  String numberOfVideos = '4';
+  String numberOfVideos = '1';
 
   @override
   void initState() {
     super.initState();
+
+    VideoSourceManager.getSubscribedVideoSource();
   }
 
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-          actions: <Widget>[
-            new DropdownButtonHideUnderline(
+    return ResponsiveScaffold(
+      title: Text(widget.title),
+      endIcon: Icons.filter_list,
+      endDrawer: ListView(
+        padding: EdgeInsets.all(10),
+        children: <Widget>[
+          ListTile(
+            title: Text('Number of videos'),
+            trailing: DropdownButtonHideUnderline(
               child: new DropdownButton<String>(
                 value: numberOfVideos,
                 items: <DropdownMenuItem<String>>[
@@ -78,25 +89,35 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             ),
-            IconButton(
-              icon: Icon(Icons.refresh),
-              color: Theme.of(context).accentIconTheme.color,
-              onPressed: () async {
-                setState(() {});
+          ),
+          ListTile(
+            title: Text('Video source'),
+            subtitle: Text('Change the video source'),
+          ),
+          ListTile(
+            leading: Icon(Icons.video_library),
+            title: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+              value: '1',
+              items: <DropdownMenuItem<String>>[
+                new DropdownMenuItem(
+                  child: new Text('Test videos'),
+                  value: '1',
+                ),
+                new DropdownMenuItem(
+                  child: new Text('Another video source'),
+                  value: '2',
+                ),
+              ],
+              onChanged: (String value) {
+                setState(() => numberOfVideos = value);
               },
-            ),
-            IconButton(
-              icon: Icon(Icons.settings),
-              color: Theme.of(context).accentIconTheme.color,
-              onPressed: () async {
-                await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => Settings()));
-              },
-            ),
-          ],
-        ),
-        body: VideoGrid(numberOfVideos));
+            )),
+          ),
+        ],
+      ),
+      body: VideoGrid(
+          numberOfVideos, VideoSourceManager.getSubscribedVideoSource()),
+    );
   }
 }

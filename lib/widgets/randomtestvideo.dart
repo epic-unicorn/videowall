@@ -106,24 +106,9 @@ class _RandomTestVideoState extends State<RandomTestVideo> {
             ],
           );
         } else {
-          // If the VideoPlayerController is still initializing, show a
-          // loading spinner.
           return Center(child: CircularProgressIndicator());
         }
       },
     );
-
-    /*
-    return SizedBox.expand(
-      child: AspectRatio(
-        aspectRatio: _controller.value.aspectRatio,
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: <Widget>[
-            VideoPlayer(_controller),
-          ],
-        ),
-      ),
-    );*/
   }
 }
