@@ -2,24 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:videowall/adapters/videowalladapterbase.dart';
 
-class RandomTestVideo extends StatefulWidget {
+class MP4Video extends StatefulWidget {
   final VideowallAdapterBase adapter;
 
-  const RandomTestVideo({
+  const MP4Video({
     @required this.adapter,
   }) : assert(adapter != null);
 
-  _RandomTestVideoState createState() => _RandomTestVideoState();
+  _MP4VideoState createState() => _MP4VideoState();
 }
 
-class _RandomTestVideoState extends State<RandomTestVideo> {
+class _MP4VideoState extends State<MP4Video> {
   VideoPlayerController _controller;
   Future<void> _initializeVideoPlayerFuture;
 
   @override
   void initState() {
     _controller = VideoPlayerController.network(
-        widget.adapter.getVideowallItem().videourl);
+        widget.adapter.getRandomVideowallItem().videourl);
     _controller.addListener(() {
       setState(() {});
     });
@@ -86,7 +86,7 @@ class _RandomTestVideoState extends State<RandomTestVideo> {
               Align(
                 alignment: Alignment.bottomRight,
                 child: Container(
-                  color: Colors.black54,
+                  color: Colors.black12,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
@@ -94,8 +94,9 @@ class _RandomTestVideoState extends State<RandomTestVideo> {
                         child: IconButton(
                           icon: Icon(Icons.refresh),
                           onPressed: () {
-                            _getValuesAndPlay(
-                                widget.adapter.getVideowallItem().videourl);
+                            _getValuesAndPlay(widget.adapter
+                                .getRandomVideowallItem()
+                                .videourl);
                           },
                         ),
                       )

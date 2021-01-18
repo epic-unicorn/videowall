@@ -67,13 +67,20 @@ class _MyHomePageState extends State<MyHomePage> {
         children: <Widget>[
           ListTile(
             title: Text('Number of videos'),
-            trailing: DropdownButtonHideUnderline(
+          ),
+          ListTile(
+            leading: Icon(Icons.grid_view),
+            title: DropdownButtonHideUnderline(
               child: new DropdownButton<String>(
                 value: numberOfVideos,
                 items: <DropdownMenuItem<String>>[
                   new DropdownMenuItem(
                     child: new Text('1'),
                     value: '1',
+                  ),
+                  new DropdownMenuItem(
+                    child: new Text('2'),
+                    value: '2',
                   ),
                   new DropdownMenuItem(
                     child: new Text('4'),
@@ -92,7 +99,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           ListTile(
             title: Text('Video source'),
-            subtitle: Text('Change the video source'),
           ),
           ListTile(
             leading: Icon(Icons.video_library),

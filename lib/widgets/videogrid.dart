@@ -1,11 +1,13 @@
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:videowall/adapters/testvideoadapter.dart';
 import 'package:videowall/adapters/videowalladapterbase.dart';
-import 'package:videowall/widgets/randomtestvideo.dart';
+import 'package:videowall/adapters/xvideosadapter.dart';
+import 'package:videowall/adapters/youtubevideoadapter.dart';
+import 'package:videowall/widgets/mp4video.dart';
+import 'package:videowall/widgets/youtubevideo.dart';
 
 class VideoGrid extends StatefulWidget {
   final String numberOfVideos;
@@ -35,12 +37,22 @@ class _VideoGridState extends State<VideoGrid> {
         ],
         children: [
           for (var i = 0; i < int.parse(widget.numberOfVideos); i++)
-            if (widget.videowallAdapter is TestVideoAdapter)
-              RandomTestVideo(
-                adapter: widget.videowallAdapter,
-              ),
+            addVideowallItem()
         ],
       ),
     );
+  }
+
+  Widget addVideowallItem() {
+    switch (widget.videowallAdapter.runtimeType) {
+      case TestVideoAdapter:
+        return MP4Video(adapter: widget.videowallAdapter);
+      case YoutubeVideoAdapter:
+        return YoutubeVideo();
+      case XVideosAdapter:
+        return MP4Video(adapter: widget.videowallAdapter);
+    }
+    //default
+    return MP4Video(adapter: widget.videowallAdapter);
   }
 }

@@ -8,7 +8,7 @@ class TestVideoAdapter implements VideowallAdapterBase {
   final TestVideoApi _api = TestVideoApi();
 
   @override
-  VideowallModel getVideowallItem() {
+  VideowallModel getRandomVideowallItem() {
     var testVideosJson = _api.getTestVideos();
     var videoList = _parseJson(testVideosJson);
     if (videoList.isNotEmpty)
