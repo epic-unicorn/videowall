@@ -18,16 +18,18 @@ class _MP4VideoState extends State<MP4Video> {
 
   @override
   void initState() {
-    _controller = VideoPlayerController.network(
-        widget.adapter.getRandomVideowallItem().videourl);
-    _controller.addListener(() {
-      setState(() {});
+    widget.adapter.getRandomVideowallItem().then((videoWallItem) {
+      _controller = VideoPlayerController.network(videoWallItem.videourl);
+      _controller.addListener(() {
+        setState(() {});
+      });
+      _initializeVideoPlayerFuture = _controller.initialize().then((value) => {
+            _controller.setVolume(0),
+            _controller.play(),
+            _controller.setLooping(true)
+          });
     });
-    _initializeVideoPlayerFuture = _controller.initialize().then((value) => {
-          _controller.setVolume(0),
-          _controller.play(),
-          _controller.setLooping(true)
-        });
+
     super.initState();
   }
 
@@ -94,9 +96,10 @@ class _MP4VideoState extends State<MP4Video> {
                         child: IconButton(
                           icon: Icon(Icons.refresh),
                           onPressed: () {
-                            _getValuesAndPlay(widget.adapter
-                                .getRandomVideowallItem()
-                                .videourl);
+                            widget.adapter.getRandomVideowallItem().then(
+                                (videowallItem) => {
+                                      _getValuesAndPlay(videowallItem.videourl)
+                                    });
                           },
                         ),
                       )

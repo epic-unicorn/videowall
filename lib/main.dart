@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:responsive_scaffold/responsive_scaffold.dart';
 import 'package:videowall/VideoSourceManager.dart';
 import 'package:videowall/widgets/videogrid.dart';
@@ -48,17 +47,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String numberOfVideos = '1';
+  VideoSourceManager _videoSourceManager = new VideoSourceManager();
+  VideoSource _selectedVideoSource;
+  List<VideoSource> _availableVideoSources = [];
 
   @override
   void initState() {
     super.initState();
-
-    VideoSourceManager.getSubscribedVideoSource();
+    _availableVideoSources = _videoSourceManager.getAvailableVideoSources();
+    _selectedVideoSource = _availableVideoSources.first;
   }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     return ResponsiveScaffold(
       title: Text(widget.title),
       endIcon: Icons.filter_list,
@@ -103,27 +104,22 @@ class _MyHomePageState extends State<MyHomePage> {
           ListTile(
             leading: Icon(Icons.video_library),
             title: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-              value: '1',
-              items: <DropdownMenuItem<String>>[
-                new DropdownMenuItem(
-                  child: new Text('Test videos'),
-                  value: '1',
-                ),
-                new DropdownMenuItem(
-                  child: new Text('Another video source'),
-                  value: '2',
-                ),
-              ],
-              onChanged: (String value) {
-                setState(() => numberOfVideos = value);
+                child: DropdownButton<VideoSource>(
+              value: _selectedVideoSource,
+              items: _availableVideoSources.map((VideoSource map) {
+                return new DropdownMenuItem<VideoSource>(
+                    value: map, child: new Text(map.title));
+              }).toList(),
+              onChanged: (VideoSource newValue) {
+                setState(() {
+                  _selectedVideoSource = newValue;
+                });
               },
             )),
           ),
         ],
       ),
-      body: VideoGrid(
-          numberOfVideos, VideoSourceManager.getSubscribedVideoSource()),
+      body: VideoGrid(numberOfVideos, _selectedVideoSource.videowallAdapter),
     );
   }
 }

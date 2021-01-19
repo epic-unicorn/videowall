@@ -17,20 +17,29 @@ class XVideosApi {
         container.querySelectorAll('div.thumb-inside > div.thumb > a');
 
     pageLinks.shuffle();
+    print(pageLinks.length);
 
-    var videoPageUrl = baseUrl + pageLinks.first.attributes['href'];
+    try {
+      var videoPageUrl = baseUrl + pageLinks.first.attributes['href'];
 
-    response = await client.get(videoPageUrl);
-    document = parse(response.body);
-    Element videoplayer =
-        document.querySelectorAll("#video-player-bg > script").elementAt(3);
+      response = await client.get(videoPageUrl);
+      document = parse(response.body);
+      Element videoplayer =
+          document.querySelectorAll("#video-player-bg > script").elementAt(3);
 
-    var regExp = new RegExp(r"setVideoUrlHigh\('(.*?)'\)");
+      var regExp = new RegExp(r"setVideoUrlHigh\('(.*?)'\)");
 
-    // poor mans solution.. but i hate regex
-    String videourl = regExp.stringMatch(videoplayer.innerHtml.toString());
-    videourl = videourl.substring(17, videourl.length - 2);
+      // poor mans solution.. but i hate regex
+      String videourl = regExp.stringMatch(videoplayer.innerHtml.toString());
+      videourl = videourl.substring(17, videourl.length - 2);
 
-    return new VideowallModel(videourl: videourl);
+      print(videourl);
+
+      return new VideowallModel(videourl: videourl);
+    } catch (e) {
+      print('!!! XVideos API error reading video URLs\n' + e);
+    }
+
+    return VideowallModel();
   }
 }

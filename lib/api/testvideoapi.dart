@@ -1,3 +1,8 @@
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:videowall/models/videowall_model.dart';
+
 class TestVideoApi {
   final String _testVideos = '''
   {
@@ -58,7 +63,21 @@ class TestVideoApi {
   }
   ''';
 
-  String getTestVideos() {
-    return _testVideos;
+  Future<VideowallModel> getTestVideo() async {
+    var videoList = _parseJson(_testVideos);
+    return videoList[new Random().nextInt(videoList.length)];
+  }
+
+  List<VideowallModel> _parseJson(String testVideoJson) {
+    var testVideoMap = json.decode(testVideoJson) as Map<String, dynamic>;
+    var videosJsonList = testVideoMap['videos'] as List;
+    var videosList = videosJsonList
+        .map((json) => VideowallModel(
+              title: json['title'],
+              videourl: json['source'],
+            ))
+        .toList();
+
+    return videosList;
   }
 }

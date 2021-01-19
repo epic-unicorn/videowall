@@ -3,7 +3,7 @@ import 'package:videowall/models/videowall_model.dart';
 
 class YoutubeVideoAdapter implements VideowallAdapterBase {
   @override
-  VideowallModel getRandomVideowallItem() {
+  Future<VideowallModel> getRandomVideowallItem() async {
     return new VideowallModel();
   }
 }
