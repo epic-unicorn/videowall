@@ -88,21 +88,32 @@ class _MP4VideoState extends State<MP4Video> {
               Align(
                 alignment: Alignment.bottomRight,
                 child: Container(
-                  color: Colors.black12,
+                  color: Colors.black54,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Container(
-                        child: IconButton(
-                          icon: Icon(Icons.refresh),
-                          onPressed: () {
-                            widget.adapter.getRandomVideowallItem().then(
-                                (videowallItem) => {
-                                      _getValuesAndPlay(videowallItem.videourl)
-                                    });
-                          },
-                        ),
-                      )
+                      IconButton(
+                        icon: Icon(Icons.replay_10_outlined),
+                        onPressed: () {
+                          _controller.seekTo(_controller.value.position -
+                              Duration(seconds: 10));
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.refresh),
+                        onPressed: () {
+                          widget.adapter.getRandomVideowallItem().then(
+                              (videowallItem) =>
+                                  {_getValuesAndPlay(videowallItem.videourl)});
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.forward_10_outlined),
+                        onPressed: () {
+                          _controller.seekTo(_controller.value.position +
+                              Duration(seconds: 10));
+                        },
+                      ),
                     ],
                   ),
                 ),
