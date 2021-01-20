@@ -6,4 +6,14 @@ class YoutubeVideoAdapter implements VideowallAdapterBase {
   Future<VideowallModel> getRandomVideowallItem() async {
     return new VideowallModel();
   }
+
+  @override
+  void setSearchParameter(String query) {
+    // TODO: implement setSearchParameter
+  }
+
+  @override
+  bool canPerformSearch() {
+    return false;
+  }
 }

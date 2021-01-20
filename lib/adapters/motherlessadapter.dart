@@ -1,22 +1,23 @@
 import 'package:videowall/adapters/videowalladapterbase.dart';
-import 'package:videowall/api/testvideoapi.dart';
+import 'package:videowall/api/motherlessapi.dart';
 import 'package:videowall/models/videowall_model.dart';
 
-class TestVideoAdapter implements VideowallAdapterBase {
-  final TestVideoApi _api = TestVideoApi();
+class MotherlessAdapter implements VideowallAdapterBase {
+  final MotherlessApi _api = MotherlessApi();
+  String query;
 
   @override
   Future<VideowallModel> getRandomVideowallItem() async {
-    return _api.getTestVideo();
+    return _api.getVideo(query);
   }
 
   @override
   void setSearchParameter(String query) {
-    // NO USED FOR TEST VIDEOS
+    this.query = query;
   }
 
   @override
   bool canPerformSearch() {
-    return false;
+    return true;
   }
 }

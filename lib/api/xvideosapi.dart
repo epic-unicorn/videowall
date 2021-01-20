@@ -4,8 +4,9 @@ import 'package:html/dom.dart';
 import 'package:videowall/models/videowall_model.dart';
 
 class XVideosApi {
-  Future<VideowallModel> getVideo() async {
-    var baseUrl = 'https://cors-anywhere.herokuapp.com/https://www.xvideos.com';
+  Future<VideowallModel> getVideo(String query) async {
+    var baseUrl =
+        'https://cors-anywhere.herokuapp.com/https://www.xvideos.com/?k=$query';
 
     var client = Client();
     Response response = await client.get(baseUrl);
@@ -17,10 +18,11 @@ class XVideosApi {
         container.querySelectorAll('div.thumb-inside > div.thumb > a');
 
     pageLinks.shuffle();
-    print(pageLinks.length);
 
     try {
-      var videoPageUrl = baseUrl + pageLinks.first.attributes['href'];
+      var videoPageUrl =
+          'https://cors-anywhere.herokuapp.com/https://www.xvideos.com/' +
+              pageLinks.first.attributes['href'];
 
       response = await client.get(videoPageUrl);
       document = parse(response.body);
@@ -37,7 +39,7 @@ class XVideosApi {
 
       return new VideowallModel(videourl: videourl);
     } catch (e) {
-      print('!!! XVideos API error reading video URLs\n' + e);
+      print('!!! XVideos API error reading video URLs\n');
     }
 
     return VideowallModel();

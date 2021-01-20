@@ -117,6 +117,16 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             )),
           ),
+          if (_selectedVideoSource.videowallAdapter.canPerformSearch())
+            ListTile(
+                leading: Icon(Icons.search),
+                title: TextField(
+                  decoration: InputDecoration(labelText: 'hmmmm....'),
+                  onChanged: (text) {
+                    _selectedVideoSource.videowallAdapter
+                        .setSearchParameter(text);
+                  },
+                )),
         ],
       ),
       body: VideoGrid(numberOfVideos, _selectedVideoSource.videowallAdapter),

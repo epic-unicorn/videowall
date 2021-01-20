@@ -1,3 +1,4 @@
+import 'package:videowall/adapters/motherlessadapter.dart';
 import 'package:videowall/adapters/testvideoadapter.dart';
 import 'package:videowall/adapters/videowalladapterbase.dart';
 import 'package:videowall/adapters/xvideosadapter.dart';
@@ -16,6 +17,8 @@ class VideoSourceManager {
         .add(new VideoSource(new TestVideoAdapter(), "Test videos"));
     _availableVideoSources
         .add(new VideoSource(new XVideosAdapter(), "XVideos"));
+    _availableVideoSources
+        .add(new VideoSource(new MotherlessAdapter(), "Motherless"));
   }
 
   List<VideoSource> getAvailableVideoSources() {

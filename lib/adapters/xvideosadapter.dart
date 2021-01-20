@@ -4,9 +4,20 @@ import 'package:videowall/models/videowall_model.dart';
 
 class XVideosAdapter implements VideowallAdapterBase {
   final XVideosApi _api = XVideosApi();
+  String query;
 
   @override
   Future<VideowallModel> getRandomVideowallItem() async {
-    return _api.getVideo();
+    return _api.getVideo(query);
+  }
+
+  @override
+  void setSearchParameter(String query) {
+    this.query = query;
+  }
+
+  @override
+  bool canPerformSearch() {
+    return true;
   }
 }
