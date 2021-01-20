@@ -35,8 +35,6 @@ class XVideosApi {
       String videourl = regExp.stringMatch(videoplayer.innerHtml.toString());
       videourl = videourl.substring(17, videourl.length - 2);
 
-      print(videourl);
-
       return new VideowallModel(videourl: videourl);
     } catch (e) {
       print('!!! XVideos API error reading video URLs\n');
