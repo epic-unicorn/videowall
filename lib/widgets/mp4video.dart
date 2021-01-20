@@ -79,19 +79,31 @@ class _MP4VideoState extends State<MP4Video> {
         if (snapshot.connectionState == ConnectionState.done) {
           return Stack(
             children: <Widget>[
-              Center(
-                child: AspectRatio(
-                  aspectRatio: _controller.value.aspectRatio,
-                  child: VideoPlayer(_controller),
+              GestureDetector(
+                onTap: () {
+                  widget.adapter.getRandomVideowallItem().then(
+                      (videowallItem) =>
+                          {_getValuesAndPlay(videowallItem.videourl)});
+                },
+                child: Center(
+                  child: AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
+                  ),
                 ),
               ),
               Align(
-                alignment: Alignment.bottomRight,
+                alignment: Alignment.bottomCenter,
                 child: Container(
-                  color: Colors.black54,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.volume_off),
+                        onPressed: () {
+                          _controller.setVolume(0);
+                        },
+                      ),
                       IconButton(
                         icon: Icon(Icons.replay_10_outlined),
                         onPressed: () {
@@ -99,19 +111,25 @@ class _MP4VideoState extends State<MP4Video> {
                               Duration(seconds: 10));
                         },
                       ),
-                      IconButton(
-                        icon: Icon(Icons.refresh),
-                        onPressed: () {
-                          widget.adapter.getRandomVideowallItem().then(
-                              (videowallItem) =>
-                                  {_getValuesAndPlay(videowallItem.videourl)});
-                        },
-                      ),
+                      FlatButton(
+                          onPressed: () {
+                            widget.adapter.getRandomVideowallItem().then(
+                                (videowallItem) => {
+                                      _getValuesAndPlay(videowallItem.videourl)
+                                    });
+                          },
+                          child: Text('NEW VIDEO')),
                       IconButton(
                         icon: Icon(Icons.forward_10_outlined),
                         onPressed: () {
                           _controller.seekTo(_controller.value.position +
                               Duration(seconds: 10));
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.volume_up),
+                        onPressed: () {
+                          _controller.setVolume(80);
                         },
                       ),
                     ],
