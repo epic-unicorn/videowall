@@ -36,7 +36,7 @@ class XVideosApi {
       videourl = videourl.substring(17, videourl.length - 2);
 
       print('XXvideos: ' + videourl);
-      return new VideowallModel(videourl: videourl);
+      return new VideowallModel(videourl: videourl, title: '');
     } catch (e) {
       print('!!! XVideos API error reading video URLs\n');
     }

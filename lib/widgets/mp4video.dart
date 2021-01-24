@@ -15,11 +15,13 @@ class MP4Video extends StatefulWidget {
 class _MP4VideoState extends State<MP4Video> {
   VideoPlayerController _controller;
   Future<void> _initializeVideoPlayerFuture;
+  String _videoTitle;
 
   @override
   void initState() {
     widget.adapter.getRandomVideowallItem().then((videoWallItem) {
       _controller = VideoPlayerController.network(videoWallItem.videourl);
+      _videoTitle = videoWallItem.title;
       _controller.addListener(() {
         setState(() {});
       });
@@ -93,6 +95,15 @@ class _MP4VideoState extends State<MP4Video> {
                 ),
               ),
               Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                    height: 40,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Text(_videoTitle)],
+                    )),
+              ),
+              Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
                   child: Row(
@@ -114,11 +125,13 @@ class _MP4VideoState extends State<MP4Video> {
                       FlatButton(
                           onPressed: () {
                             // first play static tv noise
+                            _videoTitle = 'Loading...';
                             _getValuesAndPlay('assets/static.webm');
 
                             widget.adapter.getRandomVideowallItem().then(
                                 (videowallItem) => {
-                                      _getValuesAndPlay(videowallItem.videourl)
+                                      _getValuesAndPlay(videowallItem.videourl),
+                                      _videoTitle = videowallItem.title
                                     });
                           },
                           child: Text('REFRESH')),

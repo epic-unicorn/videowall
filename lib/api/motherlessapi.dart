@@ -32,7 +32,7 @@ class MotherlessApi {
 
       print('Motherless: ' + videourl);
 
-      return new VideowallModel(videourl: videourl);
+      return new VideowallModel(videourl: videourl, title: '');
     } catch (e) {
       print('!!! Motherless API error reading video URLs\n');
     }
