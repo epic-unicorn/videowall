@@ -113,12 +113,15 @@ class _MP4VideoState extends State<MP4Video> {
                       ),
                       FlatButton(
                           onPressed: () {
+                            // first play static tv noise
+                            _getValuesAndPlay('assets/static.webm');
+
                             widget.adapter.getRandomVideowallItem().then(
                                 (videowallItem) => {
                                       _getValuesAndPlay(videowallItem.videourl)
                                     });
                           },
-                          child: Text('NEW VIDEO')),
+                          child: Text('REFRESH')),
                       IconButton(
                         icon: Icon(Icons.forward_10_outlined),
                         onPressed: () {

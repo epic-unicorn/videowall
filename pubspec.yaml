@@ -1,7 +1,7 @@
 name: videowall
 description: A multi channel video wall on Flutter.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -21,7 +21,7 @@ dependencies:
   html: ^0.14.0+4
 
   flutter:
-    sdk: flutter
+    sdk: flutter  
 
   cupertino_icons: ^1.0.0
 
@@ -31,3 +31,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - static.webm
