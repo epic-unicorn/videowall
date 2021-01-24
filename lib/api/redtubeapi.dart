@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
@@ -18,10 +19,12 @@ class RedtubeApi {
 
       if (response.statusCode == 200) {
         var redtubeVideos = RedtubeVideos.fromJson(jsonDecode(response.body));
-        var embeddedUrl = 'https://cors-anywhere.herokuapp.com/' +
-            redtubeVideos.videos[1].video.embedUrl;
 
-        print(embeddedUrl);
+        var random = redtubeVideos
+            .videos[new Random().nextInt(redtubeVideos.videos.length)];
+        var embeddedUrl =
+            'https://cors-anywhere.herokuapp.com/' + random.video.embedUrl;
+
         var client = Client();
         Response res = await client.get(embeddedUrl);
 
@@ -32,11 +35,12 @@ class RedtubeApi {
         str = str.substring(18, str.length - 2);
 
         var yes = '{"videos":' + str + '}';
-
-        print(yes);
         var test = Mediadefinitions.fromJson(json.decode(yes));
 
-        print(test.videos[0].videoUrl);
+        print('Redtube: ' + test.videos[0].videoUrl);
+
+        return new VideowallModel(
+            videourl: test.videos[0].videoUrl, title: test.videos[0].videoUrl);
       } else {
         throw Exception('Failed to load Redtube videos');
       }
@@ -45,6 +49,7 @@ class RedtubeApi {
       print(e.toString());
     }
 
-    return VideowallModel(videourl: 'assets/static', title: '');
+    return new VideowallModel(
+        videourl: 'assets/static.webm', title: 'Error loading');
   }
 }

@@ -100,7 +100,7 @@ class _MP4VideoState extends State<MP4Video> {
                     height: 40,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Text(_videoTitle)],
+                      children: [Expanded(child: Text(_videoTitle))],
                     )),
               ),
               Align(

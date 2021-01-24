@@ -65,7 +65,9 @@ class TestVideoApi {
 
   Future<VideowallModel> getTestVideo() async {
     var videoList = _parseJson(_testVideos);
-    return videoList[new Random().nextInt(videoList.length)];
+    var randomVideo = videoList[new Random().nextInt(videoList.length)];
+    print('Testvideo: ' + randomVideo.videourl);
+    return randomVideo;
   }
 
   List<VideowallModel> _parseJson(String testVideoJson) {

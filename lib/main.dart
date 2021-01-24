@@ -121,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ListTile(
                 leading: Icon(Icons.search),
                 title: TextField(
-                  decoration: InputDecoration(labelText: 'hmmmm....'),
+                  decoration: InputDecoration(labelText: 'Zoeken naar...'),
                   onChanged: (text) {
                     _selectedVideoSource.videowallAdapter
                         .setSearchParameter(text);

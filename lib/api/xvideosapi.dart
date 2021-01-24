@@ -39,8 +39,10 @@ class XVideosApi {
       return new VideowallModel(videourl: videourl, title: '');
     } catch (e) {
       print('!!! XVideos API error reading video URLs\n');
+      print(e.toString());
     }
 
-    return VideowallModel();
+    return new VideowallModel(
+        videourl: 'assets/static.webm', title: 'Error loading');
   }
 }
