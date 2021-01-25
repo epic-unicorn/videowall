@@ -144,12 +144,7 @@ class _MP4VideoState extends State<MP4Video> {
                               Duration(seconds: 10));
                         },
                       ),
-                      IconButton(
-                        icon: Icon(Icons.volume_up),
-                        onPressed: () {
-                          _controller.setVolume(1);
-                        },
-                      ),
+                      _constructVolumeIconButton()
                     ],
                   ),
                 ),
@@ -163,10 +158,10 @@ class _MP4VideoState extends State<MP4Video> {
     );
   }
 
-  Widget constructVolumeIconButton() {
+  Widget _constructVolumeIconButton() {
     if (_controller.value.volume > 0) {
       return IconButton(
-        icon: Icon(Icons.volume_off),
+        icon: Icon(Icons.volume_up),
         onPressed: () {
           _controller.setVolume(0);
           setState(() {});
@@ -175,7 +170,7 @@ class _MP4VideoState extends State<MP4Video> {
     }
 
     return IconButton(
-      icon: Icon(Icons.volume_up),
+      icon: Icon(Icons.volume_off),
       onPressed: () {
         _controller.setVolume(1);
         setState(() {});

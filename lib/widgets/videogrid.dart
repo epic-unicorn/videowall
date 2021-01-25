@@ -26,21 +26,23 @@ class _VideoGridState extends State<VideoGrid> {
   Widget build(BuildContext context) {
     double _calculatedGridSize = sqrt(int.parse(widget.numberOfVideos));
 
-    return new Container(
-      padding: EdgeInsets.all(20),
-      child: LayoutGrid(
-        columnGap: 20,
-        rowGap: 20,
-        templateColumnSizes: [
-          for (var i = 0; i < _calculatedGridSize; i++) FlexibleTrackSize(1),
-        ],
-        templateRowSizes: [
-          for (var i = 0; i < _calculatedGridSize; i++) FlexibleTrackSize(1),
-        ],
-        children: [
-          for (var i = 0; i < int.parse(widget.numberOfVideos); i++)
-            addVideowallItem()
-        ],
+    return Scaffold(
+      body: new Container(
+        padding: EdgeInsets.all(20),
+        child: LayoutGrid(
+          columnGap: 20,
+          rowGap: 20,
+          templateColumnSizes: [
+            for (var i = 0; i < _calculatedGridSize; i++) FlexibleTrackSize(1),
+          ],
+          templateRowSizes: [
+            for (var i = 0; i < _calculatedGridSize; i++) FlexibleTrackSize(1),
+          ],
+          children: [
+            for (var i = 0; i < int.parse(widget.numberOfVideos); i++)
+              addVideowallItem()
+          ],
+        ),
       ),
     );
   }
