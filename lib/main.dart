@@ -46,7 +46,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String numberOfVideos = '1';
+  String _numberOfVideos = '1';
+  List<String> _videoGridTypes = ['1', '2', '4', '6', '9'];
   VideoSourceManager _videoSourceManager = new VideoSourceManager();
   VideoSource _selectedVideoSource;
   List<VideoSource> _availableVideoSources = [];
@@ -73,27 +74,13 @@ class _MyHomePageState extends State<MyHomePage> {
             leading: Icon(Icons.grid_view),
             title: DropdownButtonHideUnderline(
               child: new DropdownButton<String>(
-                value: numberOfVideos,
-                items: <DropdownMenuItem<String>>[
-                  new DropdownMenuItem(
-                    child: new Text('1'),
-                    value: '1',
-                  ),
-                  new DropdownMenuItem(
-                    child: new Text('2'),
-                    value: '2',
-                  ),
-                  new DropdownMenuItem(
-                    child: new Text('4'),
-                    value: '4',
-                  ),
-                  new DropdownMenuItem(
-                    child: new Text('9'),
-                    value: '9',
-                  ),
-                ],
+                value: _numberOfVideos,
+                items: _videoGridTypes.map((String value) {
+                  return new DropdownMenuItem<String>(
+                      value: value, child: new Text(value));
+                }).toList(),
                 onChanged: (String value) {
-                  setState(() => numberOfVideos = value);
+                  setState(() => _numberOfVideos = value);
                 },
               ),
             ),
@@ -121,15 +108,14 @@ class _MyHomePageState extends State<MyHomePage> {
             ListTile(
                 leading: Icon(Icons.search),
                 title: TextField(
-                  decoration: InputDecoration(labelText: 'Zoeken naar...'),
-                  onChanged: (text) {
-                    _selectedVideoSource.videowallAdapter
-                        .setSearchParameter(text);
-                  },
-                )),
+                    decoration: InputDecoration(labelText: 'Zoeken naar...'),
+                    onSubmitted: (text) {
+                      _selectedVideoSource.videowallAdapter
+                          .setSearchParameter(text);
+                    })),
         ],
       ),
-      body: VideoGrid(numberOfVideos, _selectedVideoSource.videowallAdapter),
+      body: VideoGrid(_numberOfVideos, _selectedVideoSource.videowallAdapter),
     );
   }
 }

@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:videowall/adapters/motherlessadapter.dart';
+import 'package:videowall/adapters/redtubeadapter.dart';
 import 'package:videowall/adapters/testvideoadapter.dart';
 import 'package:videowall/adapters/videowalladapterbase.dart';
 import 'package:videowall/adapters/xvideosadapter.dart';
@@ -24,7 +26,7 @@ class _VideoGridState extends State<VideoGrid> {
   Widget build(BuildContext context) {
     double _calculatedGridSize = sqrt(int.parse(widget.numberOfVideos));
 
-    return Container(
+    return new Container(
       padding: EdgeInsets.all(20),
       child: LayoutGrid(
         columnGap: 20,
@@ -51,8 +53,12 @@ class _VideoGridState extends State<VideoGrid> {
         return YoutubeVideo();
       case XVideosAdapter:
         return MP4Video(adapter: widget.videowallAdapter);
+      case RedtubeAdapter:
+        return MP4Video(adapter: widget.videowallAdapter);
+      case MotherlessAdapter:
+        return MP4Video(adapter: widget.videowallAdapter);
     }
-    //default
-    return MP4Video(adapter: widget.videowallAdapter);
+    // Unkown adapter
+    throw new Exception('Unknown adapter is requested.');
   }
 }

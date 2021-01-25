@@ -18,8 +18,8 @@ class VideoSourceManager {
         .add(new VideoSource(new TestVideoAdapter(), "Test videos"));
     _availableVideoSources
         .add(new VideoSource(new XVideosAdapter(), "XVideos"));
-    _availableVideoSources
-        .add(new VideoSource(new MotherlessAdapter(), "Motherless"));
+    //_availableVideoSources
+    //    .add(new VideoSource(new MotherlessAdapter(), "Motherless"));
     _availableVideoSources
         .add(new VideoSource(new RedtubeAdapter(), "Redtube"));
   }

@@ -24,6 +24,10 @@ class MotherlessApi {
       response = await client.get(videoPageUrl);
       document = parse(response.body);
 
+      String title = document
+          .querySelector(
+              'div.media-about-container > div.media-about-wrapper > div.media-about-wrapper-inner > div.media-meta > div.media-meta-title > h1')
+          .innerHtml;
       Element videoplayer = document.querySelector("#content > script");
 
       var videourl = videoplayer.innerHtml.substring(
@@ -32,7 +36,7 @@ class MotherlessApi {
 
       print('Motherless: ' + videourl);
 
-      return new VideowallModel(videourl: videourl, title: '');
+      return new VideowallModel(videourl: videourl, title: title);
     } catch (e) {
       print('!!! Motherless API error reading video URLs\n');
       print(e.toString());

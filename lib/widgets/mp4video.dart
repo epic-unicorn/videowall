@@ -81,40 +81,41 @@ class _MP4VideoState extends State<MP4Video> {
         if (snapshot.connectionState == ConnectionState.done) {
           return Stack(
             children: <Widget>[
-              GestureDetector(
-                onTap: () {
-                  widget.adapter.getRandomVideowallItem().then(
-                      (videowallItem) =>
-                          {_getValuesAndPlay(videowallItem.videourl)});
-                },
-                child: Center(
-                  child: AspectRatio(
+              Center(
+                child: AspectRatio(
                     aspectRatio: _controller.value.aspectRatio,
-                    child: VideoPlayer(_controller),
-                  ),
-                ),
+                    child: Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: <Widget>[
+                        VideoPlayer(_controller),
+                        VideoProgressIndicator(_controller,
+                            allowScrubbing: true),
+                      ],
+                    )),
               ),
               Align(
                 alignment: Alignment.topCenter,
                 child: Container(
+                    color: Colors.black45,
                     height: 40,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Expanded(child: Text(_videoTitle))],
+                      children: [
+                        Expanded(
+                            child: Text(
+                          _videoTitle,
+                          textAlign: TextAlign.center,
+                        ))
+                      ],
                     )),
               ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Container(
+                  color: Colors.black45,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      IconButton(
-                        icon: Icon(Icons.volume_off),
-                        onPressed: () {
-                          _controller.setVolume(0);
-                        },
-                      ),
                       IconButton(
                         icon: Icon(Icons.replay_10_outlined),
                         onPressed: () {
@@ -122,19 +123,20 @@ class _MP4VideoState extends State<MP4Video> {
                               Duration(seconds: 10));
                         },
                       ),
-                      FlatButton(
-                          onPressed: () {
-                            // first play static tv noise
-                            _videoTitle = 'Loading...';
-                            _getValuesAndPlay('assets/static.webm');
+                      IconButton(
+                        icon: Icon(Icons.refresh_outlined),
+                        onPressed: () {
+                          // first play static tv noise
+                          _videoTitle = 'Loading...';
+                          _getValuesAndPlay('assets/static.webm');
 
-                            widget.adapter.getRandomVideowallItem().then(
-                                (videowallItem) => {
-                                      _getValuesAndPlay(videowallItem.videourl),
-                                      _videoTitle = videowallItem.title
-                                    });
-                          },
-                          child: Text('REFRESH')),
+                          widget.adapter.getRandomVideowallItem().then(
+                              (videowallItem) => {
+                                    _getValuesAndPlay(videowallItem.videourl),
+                                    _videoTitle = videowallItem.title
+                                  });
+                        },
+                      ),
                       IconButton(
                         icon: Icon(Icons.forward_10_outlined),
                         onPressed: () {
@@ -145,7 +147,7 @@ class _MP4VideoState extends State<MP4Video> {
                       IconButton(
                         icon: Icon(Icons.volume_up),
                         onPressed: () {
-                          _controller.setVolume(80);
+                          _controller.setVolume(1);
                         },
                       ),
                     ],
@@ -157,6 +159,26 @@ class _MP4VideoState extends State<MP4Video> {
         } else {
           return Center(child: CircularProgressIndicator());
         }
+      },
+    );
+  }
+
+  Widget constructVolumeIconButton() {
+    if (_controller.value.volume > 0) {
+      return IconButton(
+        icon: Icon(Icons.volume_off),
+        onPressed: () {
+          _controller.setVolume(0);
+          setState(() {});
+        },
+      );
+    }
+
+    return IconButton(
+      icon: Icon(Icons.volume_up),
+      onPressed: () {
+        _controller.setVolume(1);
+        setState(() {});
       },
     );
   }

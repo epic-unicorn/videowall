@@ -29,14 +29,19 @@ class XVideosApi {
       Element videoplayer =
           document.querySelectorAll("#video-player-bg > script").elementAt(3);
 
-      var regExp = new RegExp(r"setVideoUrlHigh\('(.*?)'\)");
+      var videoRegExp = new RegExp(r"setVideoUrlHigh\('(.*?)'\)");
+      var titleRegExp = new RegExp(r"setVideoTitle\('(.*?)'\)");
 
       // poor mans solution.. but i hate regex
-      String videourl = regExp.stringMatch(videoplayer.innerHtml.toString());
+      String videourl =
+          videoRegExp.stringMatch(videoplayer.innerHtml.toString());
       videourl = videourl.substring(17, videourl.length - 2);
 
+      String title = titleRegExp.stringMatch(videoplayer.innerHtml.toString());
+      title = title.substring(15, title.length - 2);
+
       print('XXvideos: ' + videourl);
-      return new VideowallModel(videourl: videourl, title: '');
+      return new VideowallModel(videourl: videourl, title: title);
     } catch (e) {
       print('!!! XVideos API error reading video URLs\n');
       print(e.toString());
