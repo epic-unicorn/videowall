@@ -47,7 +47,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _numberOfVideos = '1';
-  List<String> _videoGridTypes = ['1', '2', '4', '6', '9'];
+  List<String> _videoGridTypes = ['1', '2', '4'];
   VideoSourceManager _videoSourceManager = new VideoSourceManager();
   VideoSource _selectedVideoSource;
   List<VideoSource> _availableVideoSources = [];

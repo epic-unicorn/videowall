@@ -24,7 +24,13 @@ class VideoGrid extends StatefulWidget {
 class _VideoGridState extends State<VideoGrid> {
   @override
   Widget build(BuildContext context) {
-    double _calculatedGridSize = sqrt(int.parse(widget.numberOfVideos));
+    double _gridSize = sqrt(int.parse(widget.numberOfVideos));
+
+    MediaQueryData queryData;
+    queryData = MediaQuery.of(context);
+
+    double _columnSize = queryData.size.width < 1000 ? 1 : _gridSize;
+    double _rowSize = _gridSize;
 
     return Scaffold(
       body: new Container(
@@ -33,18 +39,29 @@ class _VideoGridState extends State<VideoGrid> {
           columnGap: 20,
           rowGap: 20,
           templateColumnSizes: [
-            for (var i = 0; i < _calculatedGridSize; i++) FlexibleTrackSize(1),
+            for (var i = 0; i < _columnSize; i++) FlexibleTrackSize(1),
           ],
           templateRowSizes: [
-            for (var i = 0; i < _calculatedGridSize; i++) FlexibleTrackSize(1),
+            for (var i = 0; i < _rowSize; i++) FlexibleTrackSize(1),
           ],
           children: [
-            for (var i = 0; i < int.parse(widget.numberOfVideos); i++)
+            for (var i = 0;
+                i <
+                    countPlaces(_rowSize, _columnSize,
+                        double.parse(widget.numberOfVideos));
+                i++)
               addVideowallItem()
           ],
         ),
       ),
     );
+  }
+
+  double countPlaces(double rowsize, double columnsize, double numberofvideo) {
+    var availablePlaces = columnsize + rowsize;
+    return numberofvideo > availablePlaces
+        ? numberofvideo - rowsize
+        : numberofvideo;
   }
 
   Widget addVideowallItem() {

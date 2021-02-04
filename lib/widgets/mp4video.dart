@@ -128,7 +128,7 @@ class _MP4VideoState extends State<MP4Video> {
                         onPressed: () {
                           // first play static tv noise
                           _videoTitle = 'Loading...';
-                          _getValuesAndPlay('assets/static.webm');
+                          _getValuesAndPlay('assets/load.mp4');
 
                           widget.adapter.getRandomVideowallItem().then(
                               (videowallItem) => {

@@ -32,4 +32,4 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - static.webm
+    - load.mp4
