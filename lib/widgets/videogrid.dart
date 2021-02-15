@@ -2,14 +2,15 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
+import 'package:videowall/adapters/dailymotionvideoadapter.dart';
 import 'package:videowall/adapters/motherlessadapter.dart';
 import 'package:videowall/adapters/redtubeadapter.dart';
+import 'package:videowall/adapters/scorebat.dart';
 import 'package:videowall/adapters/testvideoadapter.dart';
 import 'package:videowall/adapters/videowalladapterbase.dart';
 import 'package:videowall/adapters/xvideosadapter.dart';
-import 'package:videowall/adapters/youtubevideoadapter.dart';
+import 'package:videowall/widgets/embeddedvideo.dart';
 import 'package:videowall/widgets/mp4video.dart';
-import 'package:videowall/widgets/youtubevideo.dart';
 
 class VideoGrid extends StatefulWidget {
   final String numberOfVideos;
@@ -68,8 +69,10 @@ class _VideoGridState extends State<VideoGrid> {
     switch (widget.videowallAdapter.runtimeType) {
       case TestVideoAdapter:
         return MP4Video(adapter: widget.videowallAdapter);
-      case YoutubeVideoAdapter:
-        return YoutubeVideo();
+      case DailymotionVideoAdapter:
+        return EmbeddedVideo(adapter: widget.videowallAdapter);
+      case ScorebatVideoAdapter:
+        return EmbeddedVideo(adapter: widget.videowallAdapter);
       case XVideosAdapter:
         return MP4Video(adapter: widget.videowallAdapter);
       case RedtubeAdapter:
