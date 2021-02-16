@@ -101,7 +101,6 @@ class _EmbeddedVideoState extends State<EmbeddedVideo> {
 
       _iframeElement.src = _videoUrl;
       _iframeElement.style.border = 'none';
-      _iframeElement.style.pointerEvents = 'none';
     });
   }
 }
