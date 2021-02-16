@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
-import 'package:videowall/adapters/dailymotionvideoadapter.dart';
 import 'package:videowall/adapters/motherlessadapter.dart';
 import 'package:videowall/adapters/redtubeadapter.dart';
 import 'package:videowall/adapters/scorebat.dart';
@@ -69,8 +68,6 @@ class _VideoGridState extends State<VideoGrid> {
     switch (widget.videowallAdapter.runtimeType) {
       case TestVideoAdapter:
         return MP4Video(adapter: widget.videowallAdapter);
-      case DailymotionVideoAdapter:
-        return EmbeddedVideo(adapter: widget.videowallAdapter);
       case ScorebatVideoAdapter:
         return EmbeddedVideo(adapter: widget.videowallAdapter);
       case XVideosAdapter:

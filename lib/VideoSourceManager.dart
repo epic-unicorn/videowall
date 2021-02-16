@@ -1,4 +1,3 @@
-import 'package:videowall/adapters/dailymotionvideoadapter.dart';
 import 'package:videowall/adapters/motherlessadapter.dart';
 import 'package:videowall/adapters/redtubeadapter.dart';
 import 'package:videowall/adapters/scorebat.dart';
@@ -24,8 +23,6 @@ class VideoSourceManager {
     //    .add(new VideoSource(new MotherlessAdapter(), "Motherless"));
     //_availableVideoSources
     //    .add(new VideoSource(new RedtubeAdapter(), "Redtube"));
-    _availableVideoSources
-        .add(new VideoSource(new DailymotionVideoAdapter(), "Dailymotion"));
     _availableVideoSources
         .add(new VideoSource(new ScorebatVideoAdapter(), "Scorebat"));
   }
