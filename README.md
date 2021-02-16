@@ -1,3 +1,3 @@
-# videowall
+# Videowall
 
-A multi channel video wall on Flutter.
+## A multi channel video wall on Flutter.
