@@ -1,4 +1,4 @@
-name: Videowall build
+name: Videowall
 on:
   push:
     branches:
